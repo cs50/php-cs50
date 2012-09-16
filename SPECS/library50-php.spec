@@ -2,15 +2,15 @@
 Summary: The CS50 Library for PHP simplifies use of CS50 ID.
 Name: library50-php
 Version: 2
-Release: 0
+Release: 2
 License: BSD 3-Clause License
 Group: Applications/Productivity
-Source: %{name}-%{version}.zip
 Vendor: CS50
 URL: https://manual.cs50.net/Library
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires: openssl, php >= 5.0.0, php-curl, php-gmp, php-xml
 BuildArch: noarch
+Conflicts: cs50-library-php
 
 
 ############################################################################
@@ -33,20 +33,20 @@ The CS50 Library for PHP simplifies use of CS50 ID.
 
 ############################################################################
 %prep
-/bin/rm -rf %{_builddir}/%{name}-%{version}/
-/usr/bin/unzip %{_sourcedir}/%{name}-%{version}.zip -d %{_builddir}/
+rm -rf %{_builddir}/*
+cp -a %{_sourcedir}/* %{_builddir}/
 
 
 ############################################################################
 %install
-/bin/rm -rf %{buildroot}
-/bin/mkdir -p %{buildroot}/usr/share/php
-/bin/cp -a %{_builddir}/%{name}-%{version}/CS50 %{buildroot}/usr/share/php/
+rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/php
+cp -a %{_builddir}/CS50 %{buildroot}/usr/share/php/
 
 
 ############################################################################
 %clean
-/bin/rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 
 ############################################################################
@@ -57,5 +57,7 @@ The CS50 Library for PHP simplifies use of CS50 ID.
 
 ############################################################################
 %changelog
-* Sun Sep 9 2011 David J. Malan <malan@harvard.edu> - 
+* Sun Sep 15 2012 David J. Malan <malan@harvard.edu> - 2-2
+- Tidied repo.
+* Sun Sep 9 2012 David J. Malan <malan@harvard.edu> - 2-0
 - Initial build
