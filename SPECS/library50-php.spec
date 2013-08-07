@@ -1,12 +1,12 @@
 ############################################################################
 Summary: The CS50 Library for PHP simplifies use of CS50 ID.
 Name: library50-php
-Version: 3
+Version: 4
 Release: 0
 License: BSD 3-Clause License
 Group: Applications/Productivity
 Vendor: CS50
-URL: https://manual.cs50.net/Library
+URL: https://manual.cs50.net/library/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires: openssl, php >= 5.0.0, php-curl, php-gmp, php-xml
 BuildArch: noarch
