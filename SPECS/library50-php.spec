@@ -2,7 +2,7 @@
 Summary: The CS50 Library for PHP simplifies use of CS50 ID.
 Name: library50-php
 Version: 4
-Release: 0
+Release: 1
 License: BSD 3-Clause License
 Group: Applications/Productivity
 Vendor: CS50
@@ -51,8 +51,8 @@ rm -rf %{buildroot}
 
 ############################################################################
 %files
-%defattr(-,root,root,-)
-/usr/share/php/
+%defattr(0644,root,root,0755)
+/usr/share/php/CS50
 
 
 ############################################################################
