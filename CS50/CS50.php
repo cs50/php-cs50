@@ -4,7 +4,7 @@
      * @author David J. Malan <malan@harvard.edu>
      * @link https://manual.cs50.net/Library
      * @package CS50
-     * @version 1.4
+     * @version 1.3
      *
      * Creative Commons Attribution-ShareAlike 3.0 Unported Licence
      * http://creativecommons.org/licenses/by-sa/3.0/
@@ -35,6 +35,7 @@
          * Returns URL to which user can be directed for 
          * authentication via CS50 ID.
          *
+         * @param directory   path to directory in which to store state
          * @param trust_root  URL that CS50 ID should prompt user to trust
          * @param return_to   URL to which CS50 ID should return user
          * @param fields      Simple Registration fields to request from CS50 ID
@@ -42,11 +43,11 @@
          *
          * @return URL for CS50 ID
          */
-        static function getLoginUrl($trust_root, $return_to, $fields = array("email", "fullname"), $attributes = array())
+        static function getLoginUrl($directory, $trust_root, $return_to, $fields = array("email", "fullname"), $attributes = array())
         {
             // ignore Janrain's use of deprecated functions
             $error_reporting = error_reporting();
-            error_reporting($error_reporting & ~E_DEPRECATED);
+            error_reporting($error_reporting ^ E_DEPRECATED);
 
             // load Janrain's libary
             set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__) . DIRECTORY_SEPARATOR . "share" . DIRECTORY_SEPARATOR . "openid-php-openid-2.2.2");
@@ -58,19 +59,8 @@
             // ensure $_SESSION exists for Yadis
             @session_start();
 
-            // prepare filesystem-based store
-            $path = sys_get_temp_dir() . DIRECTORY_SEPARATOR . md5($return_to);
-            mkdir($path, 0700);
-            if (!is_dir($path))
-                trigger_error("Could not create $path", E_USER_ERROR);
-            if (!is_readable($path))
-                trigger_error("Could not read from $path", E_USER_ERROR);
-            if (!is_writable($path))
-                trigger_error("Could not write to $path", E_USER_ERROR);
-            $store = new Auth_OpenID_FileStore($path);
-
             // prepare request
-            $consumer = new Auth_OpenID_Consumer($store);
+            $consumer = new Auth_OpenID_Consumer(new Auth_OpenID_FileStore($directory));
             $auth_request = $consumer->begin("https://id.cs50.net/");
 
             // request Simple Registration fields
@@ -110,15 +100,16 @@
          * returns associative array that WILL contain user's Harvard email
          * address (mail) and that MAY contain user's name (displayName).
          *
+         * @param directory  path to directory in which to store state
          * @param return_to  URL to which CS50 ID returned user
          *
          * @return user as associative array
          */
-        static function getUser($return_to)
+        static function getUser($directory, $return_to)
         {
             // ignore Janrain's use of deprecated functions
             $error_reporting = error_reporting();
-            error_reporting($error_reporting & ~E_DEPRECATED);
+            error_reporting($error_reporting ^ E_DEPRECATED);
 
             // load Janrain's libary
             set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__) . DIRECTORY_SEPARATOR . "share" . DIRECTORY_SEPARATOR . "openid-php-openid-2.2.2");
@@ -130,19 +121,8 @@
             // ensure $_SESSION exists for Yadis
             @session_start();
 
-            // prepare filesystem-based store
-            $path = sys_get_temp_dir() . DIRECTORY_SEPARATOR . md5($return_to);
-            mkdir($path, 0700);
-            if (!is_dir($path))
-                trigger_error("Could not create $path", E_USER_ERROR);
-            if (!is_readable($path))
-                trigger_error("Could not read from $path", E_USER_ERROR);
-            if (!is_writable($path))
-                trigger_error("Could not write to $path", E_USER_ERROR);
-            $store = new Auth_OpenID_FileStore($path);
-
             // get response
-            $consumer = new Auth_OpenID_Consumer($store);
+            $consumer = new Auth_OpenID_Consumer(new Auth_OpenID_FileStore($directory));
             $response = $consumer->complete($return_to);
             if ($response->status == Auth_OpenID_SUCCESS)
             {
