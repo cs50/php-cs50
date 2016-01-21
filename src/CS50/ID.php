@@ -59,7 +59,7 @@
             // if user is returning from CS50 ID, return claims
             if (isset($_GET["code"], $_GET["state"]))
             {
-                return $id::getUser();
+                return $id->getUser();
             }
             
             // redirect to CS50 ID
