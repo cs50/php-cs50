@@ -2,6 +2,8 @@
 
     namespace CS50;
 
+    require_once("vendor/autoload.php");
+
     /**
      * CS50's client for OpenID Connect.
      */
@@ -49,8 +51,12 @@
             }
 
             // return to this same URI
-            $redirect_uri = \Symfony\Component\HttpFoundation\Request::createFromGlobals()->getUri();
+            $redirect_uri = \League\Uri\Schemes\Http::createFromServer();
 
+print "<PRE>";
+print_r($_SERVER);
+print($redirect_uri) . "\n";
+exit;
             // configure client
             $id = new ID($client_id, $client_secret, $redirect_uri, $scope);
 
