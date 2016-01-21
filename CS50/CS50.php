@@ -1,15 +1,15 @@
 <?php
 
     /**
-     * CS50 Library
+     * CS50 Library 2
      * https://manual.cs50.net/Library
      *
      * @author David J. Malan <malan@harvard.edu>
      * @link https://manual.cs50.net/Library
      * @package CS50
-     * @version 3
+     * @version 2
      * 
-     * Copyright (c) 2013, David J. Malan <malan@harvard.edu>
+     * Copyright (c) 2011, David J. Malan <malan@harvard.edu>
      * All rights reserved.
      *
      * BSD 3-Clause License
@@ -80,7 +80,7 @@
             error_reporting($error_reporting & ~E_DEPRECATED);
 
             // load Janrain's libary
-            set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__) . DIRECTORY_SEPARATOR . "share" . DIRECTORY_SEPARATOR . "php-openid-11bd8e4277");
+            set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__) . DIRECTORY_SEPARATOR . "share" . DIRECTORY_SEPARATOR . "php-openid");
             require_once("Auth/OpenID/AX.php");
             require_once("Auth/OpenID/Consumer.php");
             require_once("Auth/OpenID/FileStore.php");
@@ -152,7 +152,7 @@
             error_reporting($error_reporting & ~E_DEPRECATED);
 
             // load Janrain's libary
-            set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__) . DIRECTORY_SEPARATOR . "share" . DIRECTORY_SEPARATOR . "php-openid-11bd8e4277");
+            set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__) . DIRECTORY_SEPARATOR . "share" . DIRECTORY_SEPARATOR . "php-openid");
             require_once("Auth/OpenID/AX.php");
             require_once("Auth/OpenID/Consumer.php");
             require_once("Auth/OpenID/FileStore.php");
