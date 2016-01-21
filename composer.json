@@ -1,0 +1,28 @@
+{
+    "authors": [
+        {
+            "email": "malan@harvard.edu",
+            "homepage": "http://cs.harvard.edu/malan",
+            "name": "David J. Malan"
+        }
+     ],
+    "autoload": {
+        "psr-4" : {
+            "CS50\\" : "src"
+        }
+    },
+    "homepage": "https://github.com/cs50/php",
+    "keywords": ["cs50"],
+    "license": "MIT",
+    "name": "cs50/php",
+    "require": {
+        "league/oauth2-client": "^1.1.0",
+        "php": ">=5.4",
+        "ramsey/uuid": "^3.1.0"
+    },
+    "support": {
+        "issues": "https://github.com/cs50/php/issues",
+        "source": "https://github.com/cs50/php"
+    },
+    "type": "library"
+}
