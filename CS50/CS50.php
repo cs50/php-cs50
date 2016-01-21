@@ -2,31 +2,21 @@
 
     /**
      * @author David J. Malan <malan@harvard.edu>
-     * @link https://manual.cs50.net/Library
+     * @link https://manual.cs50.net/CS50_Library
      * @package CS50
-     * @version 1.3
+     * @version 0.12
      *
      * Creative Commons Attribution-ShareAlike 3.0 Unported Licence
      * http://creativecommons.org/licenses/by-sa/3.0/
      */
 
-    // require extensions for Janrain's libary
-    if (!extension_loaded("bcmath") && !extension_loaded("gmp"))
-    	trigger_error("CS50 Library requires bcmath or gmp extension module", E_USER_ERROR);
+    // require extensions for Janrain OpenID libary
+    if (!extension_loaded("curl"))
+    	trigger_error("CS50 Library requires curl extension module", E_USER_ERROR);
     if (!extension_loaded("dom") && !extension_loaded("domxml"))
     	trigger_error("CS50 Library requires dom or domxml extension module", E_USER_ERROR);
-    if (!extension_loaded("openssl"))
-    	trigger_error("CS50 Library requires openssl extension module", E_USER_ERROR);
-
-    // ensure Janrain's library doesn't fail on Windows
-    if (strtoupper(substr(PHP_OS, 0, 3)) === "WIN")
-    {
-        // because /dev/urandom doesn't exist
-        define("Auth_OpenID_RAND_SOURCE", null);
- 
-        // because php_curl.dll doesn't come with ca-bundle.crt
-        define("Auth_Yadis_CURL_OVERRIDE", null);
-    }
+    if (!extension_loaded("bcmath") && !extension_loaded("gmp"))
+    	trigger_error("CS50 Library requires bcmath or gmp extension module", E_USER_ERROR);
 
     // CS50
     class CS50
@@ -49,8 +39,9 @@
             $error_reporting = error_reporting();
             error_reporting($error_reporting ^ E_DEPRECATED);
 
-            // load Janrain's libary
-            set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__) . DIRECTORY_SEPARATOR . "share" . DIRECTORY_SEPARATOR . "openid-php-openid-2.2.2");
+            // require Janrain OpenID libary
+            $include_path = get_include_path();
+            set_include_path($include_path . PATH_SEPARATOR . dirname(__FILE__) . "/share/openid-php-openid-2.2.2");
             require_once("Auth/OpenID/AX.php");
             require_once("Auth/OpenID/Consumer.php");
             require_once("Auth/OpenID/FileStore.php");
@@ -85,6 +76,9 @@
             // restore error_reporting
             error_reporting($error_reporting);
 
+            // restore include_path
+            set_include_path($include_path);
+
             // return URL unless error
             if (Auth_OpenID::isFailure($redirect_url))
             {
@@ -111,8 +105,9 @@
             $error_reporting = error_reporting();
             error_reporting($error_reporting ^ E_DEPRECATED);
 
-            // load Janrain's libary
-            set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__FILE__) . DIRECTORY_SEPARATOR . "share" . DIRECTORY_SEPARATOR . "openid-php-openid-2.2.2");
+            // require Janrain OpenID libary
+            $include_path = get_include_path();
+            set_include_path($include_path . PATH_SEPARATOR . dirname(__FILE__) . "/share/openid-php-openid-2.2.2");
             require_once("Auth/OpenID/AX.php");
             require_once("Auth/OpenID/Consumer.php");
             require_once("Auth/OpenID/FileStore.php");
@@ -136,13 +131,12 @@
                 // get Attribute Exchange attributes, if any
                 if ($ax_resp = Auth_OpenID_AX_FetchResponse::fromSuccessResponse($response))
                     $user = array_merge($user, $ax_resp->data);
+
+                // return user
+                return $user;
             }
-
-            // restore error_reporting
-            error_reporting($error_reporting);
-
-            // return user unless error
-            return (isset($user)) ? $user : false;
+            else
+                return false;
         }
     }
 
