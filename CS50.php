@@ -1,24 +1,15 @@
 <?php
 
     /**
-     * @author David J. Malan <malan@harvard.edu>
+     * @author David J. Malan <dmalan@harvard.edu>
      * @link https://manual.cs50.net/CS50_Library
      * @package CS50
-     * @version 0.12
+     * @version 0.11
      *
      * Creative Commons Attribution-ShareAlike 3.0 Unported Licence
      * http://creativecommons.org/licenses/by-sa/3.0/
      */
 
-    // require extensions for Janrain OpenID libary
-    if (!extension_loaded("curl"))
-    	trigger_error("CS50 Library requires curl extension module", E_USER_ERROR);
-    if (!extension_loaded("dom") && !extension_loaded("domxml"))
-    	trigger_error("CS50 Library requires dom or domxml extension module", E_USER_ERROR);
-    if (!extension_loaded("bcmath") && !extension_loaded("gmp"))
-    	trigger_error("CS50 Library requires bcmath or gmp extension module", E_USER_ERROR);
-
-    // CS50
     class CS50
     {
         /**
@@ -41,7 +32,7 @@
 
             // require Janrain OpenID libary
             $include_path = get_include_path();
-            set_include_path($include_path . PATH_SEPARATOR . dirname(__FILE__) . "/share/openid-php-openid-2.2.2");
+            set_include_path($include_path . PATH_SEPARATOR . dirname(__FILE__) . "/lib/openid-php-openid-2.2.2");
             require_once("Auth/OpenID/AX.php");
             require_once("Auth/OpenID/Consumer.php");
             require_once("Auth/OpenID/FileStore.php");
@@ -107,7 +98,7 @@
 
             // require Janrain OpenID libary
             $include_path = get_include_path();
-            set_include_path($include_path . PATH_SEPARATOR . dirname(__FILE__) . "/share/openid-php-openid-2.2.2");
+            set_include_path($include_path . PATH_SEPARATOR . dirname(__FILE__) . "/lib/openid-php-openid-2.2.2");
             require_once("Auth/OpenID/AX.php");
             require_once("Auth/OpenID/Consumer.php");
             require_once("Auth/OpenID/FileStore.php");
