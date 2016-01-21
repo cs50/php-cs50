@@ -4,7 +4,7 @@
      * @author David J. Malan <malan@harvard.edu>
      * @link https://manual.cs50.net/Library
      * @package CS50
-     * @version 1.5
+     * @version 1.4
      *
      * Creative Commons Attribution-ShareAlike 3.0 Unported Licence
      * http://creativecommons.org/licenses/by-sa/3.0/
@@ -60,7 +60,7 @@
 
             // prepare filesystem-based store
             $path = sys_get_temp_dir() . DIRECTORY_SEPARATOR . md5($return_to);
-            @mkdir($path, 0700);
+            mkdir($path, 0700);
             if (!is_dir($path))
                 trigger_error("Could not create $path", E_USER_ERROR);
             if (!is_readable($path))
@@ -132,7 +132,7 @@
 
             // prepare filesystem-based store
             $path = sys_get_temp_dir() . DIRECTORY_SEPARATOR . md5($return_to);
-            @mkdir($path, 0700);
+            mkdir($path, 0700);
             if (!is_dir($path))
                 trigger_error("Could not create $path", E_USER_ERROR);
             if (!is_readable($path))
