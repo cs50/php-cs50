@@ -43,13 +43,13 @@
         {
             // validate scope
             // https://tools.ietf.org/html/rfc6749#appendix-A.4
-            if (!preg_match("/^[\x21\x23-\x5B\x5D-\x7E]( [\x21\x23-\x5B\x5D-\x7E])*$/", $scope))
+            if (!preg_match("/^[\x{21}\x{23}-\x{5B}\x{5D}-\x{7E}]([ \x{21}\x{23}-\x{5B}\x{5D}-\x{7E}])*$/", $scope))
             {
                 trigger_error("invalid scope", E_USER_ERROR);
             }
 
             // configure OAuth2 client
-            $id = new CS50\ID($client_id, $client_secret, $scope);
+            $id = new ID($client_id, $client_secret, $scope);
 
             // if user is returning from CS50 ID, return claims
             if (isset($_GET["code"], $_GET["state"]))
@@ -58,7 +58,7 @@
             }
             
             // redirect to CS50 ID
-            header("Location: " . $id::getLoginUrl());
+            header("Location: " . $id->getLoginUrl());
             exit;
         }
 
@@ -78,6 +78,7 @@
             // return OP Endpoint URL with CSRF protection
             // https://tools.ietf.org/html/rfc6749#section-10.12
             @session_start();
+debug_print_backtrace();
             return $this->provider->getAuthorizationUrl(["state" => hash("sha256", session_id())]);
         }
 
