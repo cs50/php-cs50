@@ -49,7 +49,7 @@
             }
 
             // return to this same URI
-            $redirect_uri = Symfony\Component\HttpFoundation\Request::createFromGlobals()->getUri();
+            $redirect_uri = \Symfony\Component\HttpFoundation\Request::createFromGlobals()->getUri();
 
             // configure client
             $id = new ID($client_id, $client_secret, $redirect_uri, $scope);
