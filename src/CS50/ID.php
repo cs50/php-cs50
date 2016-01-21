@@ -17,7 +17,7 @@
         /**
          * Configures a GenericProvider for CS50 ID.
          */
-        public function __construct($client_id, $client_secret, $redirect_uri, $scope = "openid profile")
+        public function __construct($client_id, $client_secret, $redirect_uri, $scope)
         {
             $this->provider = new \League\OAuth2\Client\Provider\GenericProvider([
                 "clientId" => $client_id,
@@ -51,12 +51,8 @@
             }
 
             // return to this same URI
-            $redirect_uri = \League\Uri\Schemes\Http::createFromServer();
+            $redirect_uri = \League\Uri\Schemes\Http::createFromServer($_SERVER)->withUserInfo("")->__toString();
 
-print "<PRE>";
-print_r($_SERVER);
-print($redirect_uri) . "\n";
-exit;
             // configure client
             $id = new ID($client_id, $client_secret, $redirect_uri, $scope);
 
@@ -87,7 +83,6 @@ exit;
             // return OP Endpoint URL with CSRF protection
             // https://tools.ietf.org/html/rfc6749#section-10.12
             @session_start();
-debug_print_backtrace();
             return $this->provider->getAuthorizationUrl(["state" => hash("sha256", session_id())]);
         }
 
