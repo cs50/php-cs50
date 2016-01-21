@@ -18,7 +18,8 @@
     "require": {
         "league/oauth2-client": "^1.1.0",
         "php": ">=5.4",
-        "ramsey/uuid": "^3.1.0"
+        "ramsey/uuid": "^3.1.0",
+        "symfony/http-foundation": "^3.0"
     },
     "support": {
         "issues": "https://github.com/cs50/php/issues",

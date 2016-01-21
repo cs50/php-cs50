@@ -48,8 +48,11 @@
                 trigger_error("invalid scope", E_USER_ERROR);
             }
 
-            // configure OAuth2 client
-            $id = new ID($client_id, $client_secret, $scope);
+            // return to this same URI
+            $redirect_uri = Symfony\Component\HttpFoundation\Request::createFromGlobals()->getUri();
+
+            // configure client
+            $id = new ID($client_id, $client_secret, $redirect_uri, $scope);
 
             // if user is returning from CS50 ID, return claims
             if (isset($_GET["code"], $_GET["state"]))
