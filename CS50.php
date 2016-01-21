@@ -2,9 +2,9 @@
 
     /**
      * @author David J. Malan <dmalan@harvard.edu>
-     * @link https://manual.cs50.net/CS50_Library
+     * @link https://docs.cs50.net/CS50_Library
      * @package CS50
-     * @version 0.10
+     * @version 0.9
      *
      * Creative Commons Attribution-ShareAlike 3.0 Unported Licence
      * http://creativecommons.org/licenses/by-sa/3.0/
@@ -46,6 +46,12 @@
             // request Simple Registration fields
             $sreg_request = Auth_OpenID_SRegRequest::build(array("email"), array("fullname"));
             $auth_request->addExtension($sreg_request);
+
+            // request Attribute Exchange attributes
+            $ax_request = new Auth_OpenID_AX_FetchRequest();
+            $ax_request->add(Auth_OpenID_AX_AttrInfo::make("http://axschema.org/contact/email", 1, true));
+            $ax_request->add(Auth_OpenID_AX_AttrInfo::make("http://axschema.org/contact/namePerson", 1, false));
+            $auth_request->addExtension($ax_request);
 
             // generate URL for redirection
             $redirect_url = $auth_request->redirectURL($trust_root, $return_to);
@@ -106,23 +112,22 @@
                 $ax_resp = Auth_OpenID_AX_FetchResponse::fromSuccessResponse($response);
                 $data = $ax_resp->data;
 
-                // get user's identifier
-                if (preg_match("#^https://id.cs50.net/([0123456789abcdef]{64})$#", $response->identity_url, $matches))
-                    $user = array("id" => $matches[1]);
+                // get user's mail, if any
+                if (isset($contents["email"]))
+                    $mail = $contents["email"];
+                else if (isset($data["http://axschema.org/contact/email"]))
+                    $mail = $data["http://axschema.org/contact/email"];
                 else
                     return false;
 
-                // get user's mail, if any
-                if (isset($contents["email"]))
-                    $user["email"] = $contents["email"];
-                else if (isset($data["http://axschema.org/contact/email"]))
-                    $user["email"] = $data["http://axschema.org/contact/email"];
+                // prepare user
+                $user = array("mail" => $mail);
 
                 // get user's displayName, if any
                 if (isset($contents["fullname"]))
-                    $user["name"] = $contents["fullname"];
+                    $user["displayName"] = $contents["fullname"];
                 else if (isset($data["http://axschema.org/contact/namePerson"]))
-                    $user["name"] = $data["http://axschema.org/contact/namePerson"];
+                    $user["displayName"] = $data["http://axschema.org/contact/namePerson"];
 
                 // return user
                 return $user;
