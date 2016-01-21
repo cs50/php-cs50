@@ -8,7 +8,7 @@
      ],
     "autoload": {
         "psr-4" : {
-            "CS50\\" : "src"
+            "CS50\\" : "src/CS50"
         }
     },
     "homepage": "https://github.com/cs50/php",
