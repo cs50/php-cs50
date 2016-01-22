@@ -16,10 +16,10 @@
     "license": "MIT",
     "name": "cs50/php",
     "require": {
-        "league/oauth2-client": "^1.1.0",
+        "league/oauth2-client": "^1.1",
         "league/uri": "^4.0",
         "php": ">=5.4",
-        "ramsey/uuid": "^3.1.0"
+        "ramsey/uuid": "^3.1"
     },
     "support": {
         "issues": "https://github.com/cs50/php/issues",
