@@ -3,7 +3,7 @@
     namespace CS50;
 
     /**
-     *
+     * Wrapper for PDO that only exposes a student-friendly query function.
      */
     abstract class Database
     {
@@ -28,7 +28,7 @@
         }
 
         /**
-         * Executes SQL statement after substituting values for positional placeholders, if any.
+         * Executes SQL statement after substituting (escaped) values for positional placeholders, if any.
          * If query is SELECT, returns array of rows; if query is DELETE, INSERT, or UPDATE,
          * returns number of rows affected.
          *
@@ -98,6 +98,6 @@
                 return $statement->rowCount();
             }
         }
-
     }
+
 ?>

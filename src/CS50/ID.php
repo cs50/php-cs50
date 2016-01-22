@@ -2,20 +2,18 @@
 
     namespace CS50;
 
-    require_once("vendor/autoload.php");
-
     /**
-     * CS50's client for OpenID Connect.
+     * Client for CS50 ID.
      */
     class ID
     {
         /**
-         * Client's OpenID provider.
+         * Authorization server.
          */
         private $provider;
 
         /**
-         * Configures a GenericProvider for CS50 ID.
+         * Configures authorization server.
          */
         public function __construct($client_id, $client_secret, $redirect_uri, $scope)
         {
@@ -24,9 +22,9 @@
                 "clientSecret" => $client_secret,
                 "redirectUri" => $redirect_uri,
                 "scopes" => $scope,
-                "urlAccessToken" => "http://id.cs50.net/token", // TODO: change these to https
-                "urlAuthorize" => "http://id.cs50.net/authorize",
-                "urlResourceOwnerDetails" => "http://id.cs50.net/userinfo"
+                "urlAccessToken" => "https://id.cs50.net/token",
+                "urlAuthorize" => "https://id.cs50.net/authorize",
+                "urlResourceOwnerDetails" => "https://id.cs50.net/userinfo"
             ]);
         }
 
@@ -39,7 +37,7 @@
          * @param string client_secret
          * @param string scope
          *
-         * @return array
+         * @return array claims
          */
         public static function authenticate($client_id, $client_secret, $scope = "openid profile")
         {

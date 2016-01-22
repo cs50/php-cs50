@@ -3,9 +3,9 @@
     namespace CS50\Database;
 
     /**
-     * CS50's PDO wrapper for PostgreSQL.
+     * Wrapper for PDO's PostgreSQL driver.
      */
-    class PostgreSQL
+    class PostgreSQL extends \CS50\Database
     {
         public function __construct($host, $port, $dbname, $user, $password)
         {

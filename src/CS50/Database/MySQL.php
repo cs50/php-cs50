@@ -3,9 +3,9 @@
     namespace CS50\Database;
 
     /**
-     * CS50's PDO wrapper for MySQL.
+     * Wrapper for PDO's MySQL driver.
      */
-    class MySQL
+    class MySQL extends \CS50\Database
     {
         public function __construct($host, $port, $dbname, $username, $password)
         {
