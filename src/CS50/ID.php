@@ -50,8 +50,20 @@
                 trigger_error("invalid scope", E_USER_ERROR);
             }
 
-            // return to this same URI
-            $redirect_uri = \League\Uri\Schemes\Http::createFromServer($_SERVER)->withUserInfo("")->__toString();
+            // redirection URI
+            try
+            {
+                // sans username and password (and fragment)
+                $uri = \League\Uri\Schemes\Http::createFromServer($_SERVER)->withUserInfo("");
+
+                // sans code and state (which are reserved by OAuth2)
+                $modifier = new \League\Uri\Modifiers\RemoveQueryKeys(["code", "state"]);
+                $redirect_uri = $modifier->__invoke($uri)->__toString();
+            }
+            catch (\Exception $e)
+            {
+                trigger_error("unable to infer redirect_uri", E_USER_ERROR);
+            }
 
             // configure client
             $id = new ID($client_id, $client_secret, $redirect_uri, $scope);
@@ -133,7 +145,7 @@
             // get UserInfo with token
             try
             {
-                $owner = $provider->getResourceOwner($token);
+                $owner = $this->provider->getResourceOwner($token);
                 return $owner->toArray();
             }
             catch (\Exception $e)
