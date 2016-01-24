@@ -13,7 +13,7 @@
         private $provider;
 
         /**
-         * Configures authorization server.
+         * Configures client for authorization server.
          */
         public function __construct($client_id, $client_secret, $redirect_uri, $scope)
         {
