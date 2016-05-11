@@ -37,9 +37,9 @@
             $s = readline();
             if ($s === false)
             {
-                return INF;
+                return false;
             }
-            if (preg_match("/^(\+|-)?\d+(\.\d*)?$/", $s))
+            if (preg_match("/^(\+|-)?\d*(\.\d*)?$/", $s))
             {
                 $f = floatval($s);
                 if ($f !== INF)
@@ -53,7 +53,7 @@
 
     /**
      * Reads a line of text from standard input and returns it as an
-     * integer in -2^31, 2^31 - 1) if possible; if text does not represent
+     * integer in [-2^31, 2^31 - 1) if possible; if text does not represent
      * such an integer or if value would cause underflow or overflow,
      * user is prompted to retry. If line can't be read, returns false.
      */
@@ -64,7 +64,7 @@
             $s = readline();
             if ($s === false)
             {
-                return PHP_INT_MAX;
+                return false;
             }
             if (preg_match("/^(\+|-)?\d+$/", $s))
             {
@@ -81,7 +81,7 @@
     /**
      * Reads a line of text from standard input and returns it as a
      * string, sans trailing newline character. (Ergo, if user inputs
-     * only "\n", returns "" not null.) Returns null upon error or no
+     * only "\n", returns "" not null.) Returns false upon error or no
      * input whatsoever (i.e., just EOF).
      */
     function get_string()
