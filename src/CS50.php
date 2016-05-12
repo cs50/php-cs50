@@ -42,7 +42,7 @@
             if (preg_match("/^(\+|-)?\d*(\.\d*)?$/", $s))
             {
                 $f = floatval($s);
-                if ($f !== INF)
+                if ($f !== -INF && $f !== INF)
                 {
                     return $f;
                 }
