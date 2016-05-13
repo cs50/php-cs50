@@ -42,7 +42,7 @@
             if (preg_match("/^(\+|-)?\d*(\.\d*)?$/", $s))
             {
                 $f = floatval($s);
-                if ($f !== INF)
+                if ($f !== -INF && $f !== INF)
                 {
                     return $f;
                 }
@@ -69,7 +69,8 @@
             if (preg_match("/^(\+|-)?\d+$/", $s))
             {
                 $n = intval($s);
-                if ($n !== PHP_INT_MAX)
+                // disallow under/overflows and PHP_INT_MAX
+                if (bccomp($n, $s) === 0 && $n !== PHP_INT_MAX)
                 {
                     return $n;
                 }
