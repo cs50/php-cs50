@@ -69,8 +69,7 @@
             if (preg_match("/^(\+|-)?\d+$/", $s))
             {
                 $n = intval($s);
-                // disallow under/overflows and PHP_INT_MAX
-                if (bccomp($n, $s) === 0 && $n !== PHP_INT_MAX)
+                if (bccomp((string) $n, $s) === 0 && $n < PHP_INT_MAX)
                 {
                     return $n;
                 }
