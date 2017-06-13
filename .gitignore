@@ -1,0 +1,6 @@
+.*
+!.gitignore
+!.travis.yml
+build/
+debian/changelog
+debian/*.log

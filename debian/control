@@ -1,0 +1,18 @@
+Source: php-cs50
+Priority: optional
+Maintainer: CS50 Sysadmins <sysadmins@cs50.harvard.edu>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.5
+Section: php
+Vcs-Git: https://github.com/cs50/php-cs50.git
+
+Package: php-cs50
+Architecture: any
+Conflicts: library50-php
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Provides: library50-php, php-cs50
+Replaces: library50-php, php-cs50
+Description: CS50 library for PHP
+ makes it easier to write command-line programs that prompt the users for
+ input, and provides wrapper for PDO that only exposes a student-friendly
+ query function
