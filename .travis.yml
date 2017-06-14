@@ -8,9 +8,9 @@ before_script: echo -e $GPG_SECRET | gpg --import
 script: make deb
 deploy:
 - provider: script
-  script: 'curl --fail --data "{ \"tag_name\": \"v$(make version)\", \"target_commitish\":
-    \"$TRAVIS_COMMIT\", \"name\": \"v$(make version)\" }" --user bot50:$GITHUB_TOKEN
-    https://api.github.com/repos/$TRAVIS_REPO_SLUG/releases'
+  script: 'curl --fail --data "{ \"tag_name\": \"v$(make version)\",
+    \"target_commitish\": \"$TRAVIS_COMMIT\", \"name\": \"v$(make version)\"
+  }" --user bot50:$GITHUB_TOKEN https://api.github.com/repos/$TRAVIS_REPO_SLUG/releases'
   on:
     branch: master
 - provider: script
