@@ -1,5 +1,4 @@
 language: php
-dist: trusty
 sudo: required
 branches:
   except: "/^v\\d/"
