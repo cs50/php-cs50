@@ -11,10 +11,14 @@
             "CS50\\" : "src/CS50"
         }
     },
-    "homepage": "https://github.com/cs50/php",
+    "homepage": "https://github.com/cs50/php-cs50",
     "keywords": ["cs50"],
     "license": "MIT",
     "name": "cs50/php",
+    "repositories": [
+        "type": "vcs",
+        "url": "https://github.com/cs50/php-cs50"
+    ],
     "require": {
         "league/oauth2-client": "^1.1",
         "league/uri": "^4.0",
@@ -22,8 +26,9 @@
         "ramsey/uuid": "^3.1"
     },
     "support": {
-        "issues": "https://github.com/cs50/php/issues",
-        "source": "https://github.com/cs50/php"
+        "issues": "https://github.com/cs50/php-cs50/issues",
+        "source": "https://github.com/cs50/php-cs50"
     },
-    "type": "library"
+    "type": "library",
+    "version": "6.0.0"
 }
