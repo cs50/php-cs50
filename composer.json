@@ -15,10 +15,10 @@
     "keywords": ["cs50"],
     "license": "MIT",
     "name": "cs50/php",
-    "repositories": [
+    "repositories": [{
         "type": "vcs",
         "url": "https://github.com/cs50/php-cs50"
-    ],
+    }],
     "require": {
         "league/oauth2-client": "^1.1",
         "league/uri": "^4.0",
