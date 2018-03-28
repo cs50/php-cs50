@@ -1,9 +1,8 @@
 {
     "authors": [
         {
-            "email": "malan@harvard.edu",
-            "homepage": "http://cs.harvard.edu/malan",
-            "name": "David J. Malan"
+            "email": "sysadmins@cs50.harvard.edu",
+            "name": "CS50"
         }
      ],
     "autoload": {
@@ -11,6 +10,7 @@
             "CS50\\" : "src/CS50"
         }
     },
+    "description": "CS50 library for PHP",
     "homepage": "https://github.com/cs50/php-cs50",
     "keywords": ["cs50"],
     "license": "MIT",
@@ -29,6 +29,5 @@
         "issues": "https://github.com/cs50/php-cs50/issues",
         "source": "https://github.com/cs50/php-cs50"
     },
-    "type": "library",
-    "version": "6.0.0"
+    "type": "library"
 }
