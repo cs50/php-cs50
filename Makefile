@@ -1,32 +1,45 @@
 DESTDIR ?= /usr/local/share/php
 VERSION = 6.0.0
 
-.PHONY: build
-build: clean
-	mkdir -p build/usr/share/php/php-cs50
-	cp -r src/* build/usr/share/php/php-cs50
+SRC := $(wildcard src/*)
 
 .PHONY: clean
 clean:
-	rm -rf build php-cs50* php-cs50_*
+	rm -rf build
 
 .PHONY: deb
-deb: build
-	@echo "php-cs50 ($(VERSION)-0ubuntu1) trusty; urgency=low" > debian/changelog
-	@echo "  * v$(VERSION)" >> debian/changelog
-	@echo " -- CS50 Sysadmins <sysadmins@cs50.harvard.edu>  $$(date --rfc-2822)" >> debian/changelog
-	mkdir -p php-cs50-$(VERSION)
-	cp -r build/usr php-cs50-$(VERSION)
-	tar -cvzf php-cs50_$(VERSION).orig.tar.gz php-cs50-$(VERSION)
-	cp -r debian php-cs50-$(VERSION)
-	cd php-cs50-$(VERSION) && debuild -S -sa --lintian-opts --display-info --info --show-overrides
-	mkdir -p build/deb
-	mv php-cs50* build/deb
+deb: $(SRC)
+	rm -rf build/deb
+	mkdir -p build/deb/php-cs50/usr/share/php
+	cp -r src/* build/deb/php-cs50/usr/share/php
+
+	fpm \
+	--category php \
+	--conflicts library50-php \
+	--chdir build/deb/php-cs50 \
+	--deb-priority optional \
+	--description "CS50 library for PHP" \
+	--input-type dir \
+	--license "" \
+	--maintainer "CS50 <sysadmins@cs50.harvard.edu>" \
+	--name php-cs50 \
+	--output-type deb \
+	--package build/deb \
+	--provides library50-php \
+	--provides php-cs50 \
+	--replaces library50-php \
+	--replaces php-cs50 \
+	--url https://github.com/cs50/php-cs50 \
+	--vendor CS50 \
+	--version $(VERSION) \
+	.
+
+	rm -rf build/deb/php-cs50
 
 .PHONY: install
-install: build
+install:
 	mkdir -p $(DESTDIR)
-	cp -r build/usr/share/php/php-cs50/* $(DESTDIR)
+	cp -r src/* $(DESTDIR)
 
 .PHONY: version
 version:
