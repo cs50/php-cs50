@@ -17,9 +17,10 @@ $ sudo apt-get install php-cs50
 
 ### From Source
 
-```
-make install # may require sudo
-```
+1. Download the latest release from https://github.com/cs50/php-cs50/releases
+1. Extract `php-cs50*`
+1. cd `php-cs50`
+1. `make install # may require sudo`
 
 By default, we install to `/usr/local/share/php`. If you'd like to change the installation location, run `DESTDIR=/path/to/install make install` as desired.
 
