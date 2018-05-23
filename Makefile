@@ -1,7 +1,7 @@
 DESTDIR ?= /usr/local/share/php
 VERSION = 6.0.0
 
-SRC := $(wildcard src/*)
+SRC := $(wildcard src/**/*.php)
 
 .PHONY: clean
 clean:
