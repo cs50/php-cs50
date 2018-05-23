@@ -71,8 +71,8 @@ deploy:
     script: 'curl --fail --data "{ \"tag_name\": \"v$(make version)\",
       \"target_commitish\": \"$TRAVIS_COMMIT\", \"name\": \"v$(make version)\"
     }" --user bot50:$GITHUB_TOKEN https://api.github.com/repos/$TRAVIS_REPO_SLUG/releases'
-  on:
-    branch: master
+    on:
+      branch: master
 notifications:
   slack:
     secure: D2d4GpU6R9GDizy7zmfS4bPWgYFZ6snMlAWyQ8LfC1uA4ZgT99ktkwQRmtvvLRLrTM9snRCEJE5gm6z2NRmQLGfqJ6yIgdLYUCLRY3N+ZyR+MGHQBljwnqzFWdo2KaTcP96Q9vj09Mv28Pq3jcDt351FgXMDMKedfcW04lW4Qgw=
