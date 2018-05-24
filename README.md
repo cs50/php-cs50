@@ -15,6 +15,13 @@ $ curl -s https://packagecloud.io/install/repositories/cs50/php-cs50/script.deb.
 $ sudo apt-get install php-cs50
 ```
 
+### Fedora
+
+```
+$ curl -s https://packagecloud.io/install/repositories/cs50/php-cs50/script.rpm.sh | sudo bash
+$ sudo yum install php-cs50
+```
+
 ### From Source
 
 1. Download the latest release from https://github.com/cs50/php-cs50/releases
