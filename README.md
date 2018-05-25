@@ -11,14 +11,14 @@ Requires [Docker Toolbox](https://www.docker.com/products/docker-toolbox).
 ### Ubuntu:
 
 ```
-$ curl -s https://packagecloud.io/install/repositories/cs50/php-cs50/script.deb.sh | sudo bash
+$ curl -s https://packagecloud.io/install/repositories/cs50/repo/script.deb.sh | sudo bash
 $ sudo apt-get install php-cs50
 ```
 
 ### Fedora
 
 ```
-$ curl -s https://packagecloud.io/install/repositories/cs50/php-cs50/script.rpm.sh | sudo bash
+$ curl -s https://packagecloud.io/install/repositories/cs50/repo/script.rpm.sh | sudo bash
 $ sudo yum install php-cs50
 ```
 

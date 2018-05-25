@@ -1,7 +1,7 @@
 packagecloud: &packagecloud
   provider: packagecloud
   username: cs50
-  repository: php-cs50
+  repository: repo
   token: $PACKAGECLOUD_TOKEN
   skip_cleanup: true
   on:
@@ -24,7 +24,12 @@ before_install: gem install fpm
 script:
   - make deb
   - make rpm
-
+before_deploy: |
+  if [ -z "$(git tag --list "v$(make version)")" ]; then \
+      git config --local user.name "bot50"; \
+      git config --local user.email "bot@cs50.harvard.edu"; \
+      git tag "v$(make version)"; \
+  fi
 deploy:
   # 12.04
   - <<: *deb
