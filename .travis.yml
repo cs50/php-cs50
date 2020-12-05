@@ -1,4 +1,4 @@
-packagecloud: &packagecloud
+x-packagecloud: &packagecloud
   provider: packagecloud
   username: cs50
   repository: repo
@@ -7,13 +7,13 @@ packagecloud: &packagecloud
   on:
     branch: master
 
-deb: &deb
-  <<: *packagecloud
-  local-dir: build/deb
+x-deb: &x-deb
+  <<: *x-packagecloud
+  local_dir: build/deb
 
-rpm: &rpm
-  <<: *packagecloud
-  local-dir: build/rpm
+x-rpm: &x-rpm
+  <<: *x-packagecloud
+  local_dir: build/rpm
 
 branches:
   except: "/^v\\d/"
@@ -31,6 +31,7 @@ before_deploy: |
       git tag "v$(make version)"; \
   fi
 deploy:
+  # Ubuntu
   # 12.04
   - <<: *x-deb
     dist: ubuntu/precise
@@ -100,28 +101,28 @@ deploy:
     dist: ubuntu/groovy
 
   # Fedora
-  - <<: *rpm
+  - <<: *x-rpm
     dist: fedora/24
-  - <<: *rpm
+  - <<: *x-rpm
     dist: fedora/25
-  - <<: *rpm
+  - <<: *x-rpm
     dist: fedora/26
-  - <<: *rpm
+  - <<: *x-rpm
     dist: fedora/27
-  - <<: *rpm
+  - <<: *x-rpm
     dist: fedora/28
-  - <<: *rpm
+  - <<: *x-rpm
     dist: fedora/29
-  - <<: *rpm
+  - <<: *x-rpm
     dist: fedora/30
-  - <<: *rpm
+  - <<: *x-rpm
     dist: fedora/31
-  - <<: *rpm
+  - <<: *x-rpm
     dist: fedora/32
 
   # GitHub release
   - provider: releases
-    api_key: $GITHUB_TOKEN
+    token: $GITHUB_TOKEN
     skip_cleanup: true
     on:
       branch: master
