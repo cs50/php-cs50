@@ -83,6 +83,10 @@ deploy:
   - <<: *deb
     dist: ubuntu/bionic
 
+  # 19.10
+  - <<: *deb
+    dist: ubuntu/eoan
+
   # 20.04
   - <<: *deb
     dist: ubuntu/focal
