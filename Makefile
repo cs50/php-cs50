@@ -1,5 +1,5 @@
 DESTDIR ?= /usr/local/share/php
-VERSION = 6.0.0
+VERSION = 6.0.1
 
 SRC := $(wildcard src/**/*.php)
 
