@@ -1,4 +1,4 @@
-x-packagecloud: &packagecloud
+x-packagecloud: &x-packagecloud
   provider: packagecloud
   username: cs50
   repository: repo
